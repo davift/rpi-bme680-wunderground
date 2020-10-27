@@ -56,7 +56,6 @@ wu_key = 'Key'
 tem = 0
 pre = 0
 hum = 0
-air = 0
 dew = 0
 try:
     count = 1
@@ -64,9 +63,8 @@ try:
         if sensor.get_sensor_data():
             output = '{3:.0f}, {0:.2f} C, {1:.2f} hPa, {2:.2f} %'.format(sensor.data.temperature,sensor.data.pressure,sensor.data.humidity,count)
 
-            if sensor.data.heat_stable:
-		air = air + sensor.data.gas_resistance
-                #print('{0}, {1} Ohms'.format(output,sensor.data.gas_resistance))
+            #if sensor.data.heat_stable:
+		#print('{0}, {1} Ohms'.format(output,sensor.data.gas_resistance))
 
             #else:
                 #print(output)
@@ -77,12 +75,11 @@ try:
 	count = count + 1
 	if count > 60:
 		dew = (((math.log(hum/60/100))+((17.62*tem/60)/(243.12+tem/60)))*243.12)/(17.62-((math.log(hum/60/100))+((17.62*tem/60)/(243.12+tem/60))))
-		os.system('curl "https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID={5}&PASSWORD={6}&dateutc=now&action=updateraw&humidity={2:.1f}&tempf={0:.1f}&baromin={1:.5f}&aqi={3:.0f}&dewptf={4:.1f}"'.format(tem/60*9/5+32,pre/60*0.02952998,hum/60,air/60/1000,dew*9/5+32,wu_id,wu_key))
+		os.system('curl "https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID={4}&PASSWORD={5}&dateutc=now&action=updateraw&tempf={0:.1f}&baromin={1:.5f}&humidity={2:.1f}&dewptf={3:.1f}"'.format(tem/60*9/5+32,pre/60*0.02952998,hum/60,air/60/1000,dew*9/5+32,wu_id,wu_key))
 		count = 1
                 tem = 0
                 pre = 0
                 hum = 0
-                air = 0
 		# COMMENT THIS LINE TO KEEP IT IN LOOPING OR USER CRON TO RELOAD IT EVERY MINUTE
 		exit()
 		# TO CREATE THE CRON RE-LOAD ROUTINE ISSUE THE COMMAND: crontab -e
