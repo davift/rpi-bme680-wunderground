@@ -36,7 +36,7 @@ try:
 	count = count + 1
 	if count > 60:
 		dew = (((math.log(hum/60/100))+((17.62*tem/60)/(243.12+tem/60)))*243.12)/(17.62-((math.log(hum/60/100))+((17.62*tem/60)/(243.12+tem/60))))
-		os.system('curl "https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID={4}&PASSWORD={5}&dateutc=now&action=updateraw&tempf={0:.1f}&baromin={1:.5f}&humidity={2:.1f}&dewptf={3:.1f}"'.format(tem/60*9/5+32,pre/60*0.02952998,hum/60,air/60/1000,dew*9/5+32,wu_id,wu_key))
+		os.system('curl "https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?dateutc=now&action=updateraw&tempf={0:.1f}&baromin={1:.5f}&humidity={2:.1f}&dewptf={3:.1f}&ID={4}&PASSWORD={5}"'.format(tem/60*9/5+32,pre/60*0.02952998,hum/60,dew*9/5+32,wu_id,wu_key))
 		count = 1
                 tem = 0
                 pre = 0
