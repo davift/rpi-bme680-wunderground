@@ -28,3 +28,5 @@ UV - [index]
 visibility - [nm visibility]
 indoortempf - [F indoor temperature F]
 indoorhumidity - [% indoor humidity 0-100]
+
+AIR QUALITY INDEX - Don't worry about sending this data to WU because they do not collect this type of information.
