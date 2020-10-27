@@ -59,7 +59,7 @@ hum = 0
 air = 0
 dew = 0
 try:
-    count = 0
+    count = 1
     while True:
         if sensor.get_sensor_data():
             output = '{3:.0f}, {0:.2f} C, {1:.2f} hPa, {2:.2f} %'.format(sensor.data.temperature,sensor.data.pressure,sensor.data.humidity,count)
